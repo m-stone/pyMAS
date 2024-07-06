@@ -1,0 +1,35 @@
+# Comment
+# Blank lines ignored
+# 3-4-5 truss
+
+JOINTS
+0,0
+0,3
+4,0
+END
+
+SUPPORTS
+0,1,0
+1,1,1
+2,0,0
+END
+
+MATERIALS
+29000
+10000
+END
+
+SECTIONS
+8
+12
+END
+
+MEMBERS
+0,1,1,1
+1,2,1,1
+0,2,2,2
+END
+
+LOADS
+2,0,-50
+END
