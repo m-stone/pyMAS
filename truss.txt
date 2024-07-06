@@ -3,33 +3,40 @@
 # 3-4-5 truss
 
 JOINTS
+# x,y
 0,0
 0,3
 4,0
 END
 
 SUPPORTS
+# nid, rx, ry
 0,1,0
 1,1,1
 2,0,0
 END
 
 MATERIALS
-29000
-10000
+# E, rho
+29000, .28
+10000, .10
 END
 
 SECTIONS
+# Ag
 8
 12
 END
 
 MEMBERS
-0,1,1,1
-1,2,1,1
-0,2,2,2
+# n1, n2, matid, sxnid
+0,1,0,0
+1,2,0,0
+0,2,1,1
 END
 
 LOADS
+# nid, Px, Py
 2,0,-50
 END
+

@@ -20,7 +20,8 @@ class Node:
     def SetPosition(self,
                     position: list = [0., 0.]
                     ):
-        self.position = position
+        #self.position = position
+        [self.x, self.y] = position
         
     def SetRestraints(self,
                      restraints: list = [0,0]):
@@ -28,17 +29,18 @@ class Node:
         
     def SetLoads(self,
                  loads: list = [0., 0.]):
-        self.loads = loads
+        #self.loads = loads
+        [self.Px, self.Py] = loads
         
 class Material:
     def __init__(self,
                  id: int,
                  modulus: float = 29000.,
-                 density: float = 490
+                 density: float = 0.28
                  ):
         self.id = id
-        self.modulus = modulus
-        self.density = density
+        self.E = modulus
+        self.rho = density
         
 class Section:
     def __init__(self,
@@ -46,7 +48,7 @@ class Section:
                  area: float = 1.0
                  ):
         self.id = id
-        self.area = area
+        self.Ag = area
         
 class Member:
     def __init__(self,
