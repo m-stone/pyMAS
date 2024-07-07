@@ -26,6 +26,7 @@ class Node:
     def SetRestraints(self,
                      restraints: list = [0,0]):
         self.restraints = restraints
+        [self.r1, self.r2] = restraints
         
     def SetLoads(self,
                  loads: list = [0., 0.]):
@@ -56,11 +57,13 @@ class Member:
                  node1: Node,
                  node2: Node,
                  material: Material,
-                 section: Section):
+                 section: Section,
+                 member_type: str = 'truss'):
         self.id = id
         self.node1 = node1
         self.node2 = node2
         self.material = material
         self.section = section
+        self.member_type = member_type
         
         
