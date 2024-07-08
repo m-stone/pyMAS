@@ -17,14 +17,20 @@ ComponentDict = pymas.io.ParseTrussInput('truss.txt')
 # print(ComponentDict)
 
 #MSUP
-DOF = 2
+NCJT = 2 # 2 for plane, 3 for space
 NJ = len(ComponentDict['Nodes'])
 MSUP = pymas.analysis.ConstructMSUP(ComponentDict)
 NR = MSUP[:,1:].sum()
-NDOF = DOF*NJ - NR
+NDOF = NCJT*NJ - NR
 print(MSUP)
 print(NJ,NR,NDOF)
 
-        
-        
+# NSC
+NSC = pymas.analysis.ConstructNSC(ComponentDict, NDOF, NR, NCJT)
+print(NSC)
+
+# Global Stiffness K
+K = pymas.analysis.ConstructGlobalStiffness(ComponentDict, NCJT)
+print(K)
+
         

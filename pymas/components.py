@@ -5,6 +5,8 @@ Created on Fri Jul  5 15:40:41 2024
 @author: stone
 """
 
+import numpy as np
+
 class Node:
     def __init__(self,
                  id: int,
@@ -65,5 +67,23 @@ class Member:
         self.material = material
         self.section = section
         self.member_type = member_type
+        self.CalculateLength()
+        self.k = np.zeros((4,4))
+        self.SetLocalStiffness()
         
+    def CalculateLength(self):
+        self.length = np.linalg.norm([self.node2.x-self.node1.x,
+                                      self.node2.y-self.node1.y])
+        self.CX = (self.node2.x - self.node1.x) / self.length
+        self.CY = (self.node2.y - self.node1.y) / self.length
+        
+    def SetLocalStiffness(self):
+        Z = self.material.E * self.section.Ag / self.length
+        Z1 = Z * np.power(self.CX,2)
+        Z2 = Z * np.power(self.CY,2)
+        Z3 = Z * self.CX * self.CY
+        self.k = np.array([[Z1, Z3, -Z1, -Z3],
+                           [Z3, Z2, -Z3, -Z2],
+                           [-Z1, -Z3, Z1, Z3],
+                           [-Z3, -Z2, Z3, Z2]])
         
