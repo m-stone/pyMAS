@@ -14,11 +14,16 @@ import pymas.analysis
 # Parse input deck
 ComponentDict = pymas.io.ParseTrussInput('truss.txt')
 
-print(ComponentDict)
+# print(ComponentDict)
 
 #MSUP
+DOF = 2
+NJ = len(ComponentDict['Nodes'])
 MSUP = pymas.analysis.ConstructMSUP(ComponentDict)
+NR = MSUP[:,1:].sum()
+NDOF = DOF*NJ - NR
 print(MSUP)
+print(NJ,NR,NDOF)
         
         
         
