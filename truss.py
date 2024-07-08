@@ -24,6 +24,7 @@ NR = MSUP[:,1:].sum()
 NDOF = DOF*NJ - NR
 print(MSUP)
 print(NJ,NR,NDOF)
+
         
         
         

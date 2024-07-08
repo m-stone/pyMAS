@@ -17,6 +17,9 @@ def ConstructMSUP(ComponentDict):
     return MSUP
     
 def ConstructNSC(ComponentDict):
-    NSC = np.array([])
+    # create empty zero array
+    NSC = np.zeros((len(ComponentDict['Nodes']),1)) - 1
+    for idx, node in enumerate(ComponentDict['Nodes']):
+        pass
     return NSC
 
