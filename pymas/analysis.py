@@ -14,7 +14,9 @@ def ConstructMSUP(ComponentDict):
             MSUP = np.array([[node.id,node.r1,node.r2]])
         else:
             MSUP = np.concatenate((MSUP,[[node.id,node.r1,node.r2]]),axis=0)
-    
     return MSUP
     
+def ConstructNSC(ComponentDict):
+    NSC = np.array([])
+    return NSC
 
