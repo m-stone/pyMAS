@@ -19,6 +19,7 @@ class Node:
         self.SetRestraints(restraints)
         self.SetLoads(loads)
         self.scn1, self.scn2 = 0, 0
+        self.scn = np.array([self.scn1, self.scn2])
         
     def SetPosition(self,
                     position: list = [0., 0.]
@@ -41,6 +42,7 @@ class Node:
             self.scn1 = scn
         else:
             self.scn2 = scn
+        self.scn = np.array([self.scn1, self.scn2])
         
 class Material:
     def __init__(self,

@@ -34,4 +34,7 @@ K = pymas.analysis.ConstructGlobalStiffness(ComponentDict, NCJT)
 print('Global stiffness matrix K:')
 print(K)
 
+cd = ComponentDict
+nodes = cd['Nodes']
         
+# Load Matrix P

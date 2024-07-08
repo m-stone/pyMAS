@@ -11,14 +11,14 @@ END
 
 SUPPORTS
 # nid, rx, ry
-0,1,0
+0,0,1
 1,1,1
 END
 
 MATERIALS
 # E, rho
-29000, .28
-10000, .10
+29, .28
+10, .10
 END
 
 SECTIONS

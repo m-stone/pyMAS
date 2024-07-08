@@ -6,6 +6,7 @@ Created on Sat Jul  6 21:44:56 2024
 """
 
 import numpy as np
+import itertools as iter
 
 def ConstructMSUP(ComponentDict):
     MSUP = np.array([[]])
@@ -48,6 +49,14 @@ def ConstructGlobalStiffness(ComponentDict, NCJT: int = 2):
     dof = len(ComponentDict['Nodes']) * NCJT
     K = np.zeros((dof, dof))
     for idx, member in enumerate(ComponentDict['Members']):
-        for node in [member.node1, member.node2]:
-            pass
+        [[i,j],[k,l]] = [member.node1.scn, member.node2.scn]
+        # print(i,j,k,l)
+        for jdx, (ki,kj) in enumerate(iter.product(*[[i,j,k,l]],repeat=2)):
+            # print(ki,kj)
+            # print(member.k)
+            # print(member.k.flatten()[jdx])
+            K[ki,kj] += member.k.flatten()[jdx]
+        # for node in [member.node1, member.node2]:
+        #     # K[]
+        #     pass
     return K
