@@ -1,24 +1,32 @@
 # Comment
 # Blank lines ignored
 # 3-4-5 truss
+# Units: kips-in
+# 
+#
+#  >|\
+#   | \
+#   |  \
+# Xo|...\
+#
 
 JOINTS
 # x,y
 0,0
-0,3
-4,0
+0,36
+48,0
 END
 
 SUPPORTS
 # nid, rx, ry
-0,0,1
+0,1,0
 1,1,1
 END
 
 MATERIALS
 # E, rho
-29, .28
-10, .10
+29000, .28
+10000, .10
 END
 
 SECTIONS
@@ -36,6 +44,6 @@ END
 
 LOADS
 # nid, Px, Py
-2,0,-50
+2,0,-0.5
 END
 

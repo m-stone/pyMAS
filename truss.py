@@ -25,16 +25,37 @@ NDOF = NCJT*NJ - NR
 # print(MSUP)
 # print(NJ,NR,NDOF)
 
+print(f'{NR} restraints')
+
 # NSC
 NSC = pymas.analysis.ConstructNSC(ComponentDict, NDOF, NR, NCJT)
 # print(NSC)
 
 # Global Stiffness K
+print('Global stiffness matrix K.')
 K = pymas.analysis.ConstructGlobalStiffness(ComponentDict, NCJT)
-print('Global stiffness matrix K:')
-print(K)
+# print(K)
 
 cd = ComponentDict
 nodes = cd['Nodes']
         
 # Load Matrix P
+print(f'Load matrix:')
+P = pymas.analysis.ConstructJointLoadVector(ComponentDict, NCJT)
+print(P)
+
+# Calculate Resultant Displacements:
+print(f'Resultant Displacements:')
+D = np.matmul(np.linalg.inv(K[:NR,:NR]), P[:NR])
+print(D)
+
+DF = np.concatenate((D,np.zeros((NR,1))))
+
+# Internal Forces
+print('Internal forces:')
+Q = np.matmul(K[NR:,:],DF)
+print(Q)
+
+print('Final joint load vector:')
+P[NR:] += Q
+print(P)

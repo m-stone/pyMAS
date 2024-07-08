@@ -60,3 +60,11 @@ def ConstructGlobalStiffness(ComponentDict, NCJT: int = 2):
         #     # K[]
         #     pass
     return K
+
+def ConstructJointLoadVector(ComponentDict, NCJT: int=2):
+    dof = len(ComponentDict['Nodes']) * NCJT
+    P = np.zeros((dof,1))
+    for node in ComponentDict['Nodes']:
+        P[node.scn1] += node.Px
+        P[node.scn2] += node.Py
+    return P
