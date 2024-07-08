@@ -26,15 +26,19 @@ def ConstructNSC(ComponentDict, NDOF, NR, NCJT: int = 2):
         # print(idx, node.r1, node.r2)
         if node.r1 == 0:
             NSC[2*idx] = DOF_COUNTER
+            node.SetSCN(1,DOF_COUNTER)
             DOF_COUNTER += 1
         elif node.r1 != 0:
             NSC[2*idx] = SUPPORT_COUNTER
+            node.SetSCN(1, SUPPORT_COUNTER)
             SUPPORT_COUNTER += 1
         if node.r2 == 0:
             NSC[2*idx+1] = DOF_COUNTER
+            node.SetSCN(2,DOF_COUNTER)
             DOF_COUNTER += 1
         elif node.r2 != 0:
             NSC[2*idx+1] = SUPPORT_COUNTER
+            node.SetSCN(2, SUPPORT_COUNTER)
             SUPPORT_COUNTER += 1
         # print(NSC)
     # print(DOF_COUNTER, SUPPORT_COUNTER)
@@ -44,5 +48,6 @@ def ConstructGlobalStiffness(ComponentDict, NCJT: int = 2):
     dof = len(ComponentDict['Nodes']) * NCJT
     K = np.zeros((dof, dof))
     for idx, member in enumerate(ComponentDict['Members']):
-        pass
+        for node in [member.node1, member.node2]:
+            pass
     return K

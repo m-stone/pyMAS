@@ -22,15 +22,16 @@ NJ = len(ComponentDict['Nodes'])
 MSUP = pymas.analysis.ConstructMSUP(ComponentDict)
 NR = MSUP[:,1:].sum()
 NDOF = NCJT*NJ - NR
-print(MSUP)
-print(NJ,NR,NDOF)
+# print(MSUP)
+# print(NJ,NR,NDOF)
 
 # NSC
 NSC = pymas.analysis.ConstructNSC(ComponentDict, NDOF, NR, NCJT)
-print(NSC)
+# print(NSC)
 
 # Global Stiffness K
 K = pymas.analysis.ConstructGlobalStiffness(ComponentDict, NCJT)
+print('Global stiffness matrix K:')
 print(K)
 
         

@@ -18,6 +18,7 @@ class Node:
         self.SetPosition(position)
         self.SetRestraints(restraints)
         self.SetLoads(loads)
+        self.scn1, self.scn2 = 0, 0
         
     def SetPosition(self,
                     position: list = [0., 0.]
@@ -34,6 +35,12 @@ class Node:
                  loads: list = [0., 0.]):
         #self.loads = loads
         [self.Px, self.Py] = loads
+        
+    def SetSCN(self, dof: int = 1, scn: int = 0):
+        if dof == 1:
+            self.scn1 = scn
+        else:
+            self.scn2 = scn
         
 class Material:
     def __init__(self,
