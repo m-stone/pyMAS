@@ -20,8 +20,9 @@ def ConstructMSUP(ComponentDict):
 def ConstructNSC(ComponentDict, NDOF, NR, NCJT: int = 2):
     # create empty zero array
     # print('nsc subroutine')
+    dof = len(ComponentDict['Nodes'])*NCJT
     NSC = np.zeros((len(ComponentDict['Nodes'])*NCJT,1)) - 1
-    DOF_COUNTER, SUPPORT_COUNTER = 0, NR
+    DOF_COUNTER, SUPPORT_COUNTER = 0, dof-NR
     # print(DOF_COUNTER, SUPPORT_COUNTER)
     for idx, node in enumerate(ComponentDict['Nodes']):
         # print(idx, node.r1, node.r2)
@@ -43,6 +44,7 @@ def ConstructNSC(ComponentDict, NDOF, NR, NCJT: int = 2):
             SUPPORT_COUNTER += 1
         # print(NSC)
     # print(DOF_COUNTER, SUPPORT_COUNTER)
+    # print(NSC)
     return NSC
 
 def ConstructGlobalStiffness(ComponentDict, NCJT: int = 2):
