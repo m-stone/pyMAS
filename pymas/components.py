@@ -10,6 +10,7 @@ import numpy as np
 class Node:
     def __init__(self,
                  id: int,
+                 ndof: int = 2,
                  position: list = [0., 0.],
                  restraints: list = [0, 0],
                  loads: list = [0., 0.]
@@ -63,6 +64,40 @@ class Section:
         self.Ag = area
         
 class Member:
+    def __init__(self,
+                 id: int,
+                 node1: Node,
+                 node2: Node,
+                 material: Material,
+                 section: Section,
+                 member_type: str = 'truss'):
+        self.id = id
+        self.node1 = node1
+        self.node2 = node2
+        self.material = material
+        self.section = section
+        self.member_type = member_type
+        self.CalculateLength()
+        self.k = np.zeros((4,4))
+        self.SetLocalStiffness()
+        
+    def CalculateLength(self):
+        self.length = np.linalg.norm([self.node2.x-self.node1.x,
+                                      self.node2.y-self.node1.y])
+        self.CX = (self.node2.x - self.node1.x) / self.length
+        self.CY = (self.node2.y - self.node1.y) / self.length
+        
+    def SetLocalStiffness(self):
+        Z = self.material.E * self.section.Ag / self.length
+        Z1 = Z * np.power(self.CX,2)
+        Z2 = Z * np.power(self.CY,2)
+        Z3 = Z * self.CX * self.CY
+        self.k = np.array([[Z1, Z3, -Z1, -Z3],
+                           [Z3, Z2, -Z3, -Z2],
+                           [-Z1, -Z3, Z1, Z3],
+                           [-Z3, -Z2, Z3, Z2]])
+        
+class Truss:
     def __init__(self,
                  id: int,
                  node1: Node,
